@@ -1,0 +1,25 @@
+Link :  https://leetcode.com/problems/detect-capital/
+
+
+
+class Solution {
+public:
+    bool detectCapitalUse(string word) {
+        int count=0;
+        int i,n;
+        n=word.size(),i=0;
+        while(i<n){
+            if(isupper(word[i])){
+                count++;
+            }
+            i++;
+        }
+        if(count==1){
+            return isupper(word[0]);
+        }
+        if(count==0||count==n)
+        return true;
+        else
+        return false;
+    }
+};
