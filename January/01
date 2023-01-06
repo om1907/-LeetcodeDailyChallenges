@@ -1,0 +1,38 @@
+Link : https://leetcode.com/problems/word-pattern/
+
+
+class Solution {
+public:
+    bool wordPattern(string pat, string s) {
+        unordered_map<string,char>strTochar;
+        unordered_map<char,string> charTostr;
+        s+=' ';
+        string currWord="";
+        int currIndx=0;
+        for(int i=0;i<s.size();i++){
+            if(s[i]==' '){
+                char currChar=pat[currIndx++];
+                if(charTostr.count(currChar)){
+                    string mappedWord=charTostr[currChar];
+                    if(mappedWord!=currWord){
+                        return false;
+                    }
+                }
+                else if(strTochar.count(currWord)){
+                    if(currChar!=strTochar[currWord]){
+                        return false;
+                    }
+                }
+                else{
+                    charTostr[currChar]=(currWord);
+                    strTochar[currWord]=(currChar);
+                }
+                currWord="";
+            }
+            else{
+                currWord.push_back(s[i]);
+            }            
+        }
+        return pat.size()==currIndx;
+    }
+};
