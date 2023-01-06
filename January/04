@@ -1,0 +1,26 @@
+ Link :  https://leetcode.com/problems/minimum-rounds-to-complete-all-tasks/
+ 
+ 
+ class Solution {
+public:
+    int minimumRounds(vector<int>& tasks) {
+        unordered_map<int,int> ump;
+        for(auto it:tasks){
+            ump[it]++;
+        }
+        int totalRounds=0;
+        for(auto it:ump){
+            int freq=it.second;
+            if(freq==1){
+                return -1;
+            }
+            if(freq%3){
+                totalRounds+=freq/3+1;
+            }
+            else{
+                totalRounds+=freq/3;
+            }
+        }
+        return totalRounds;
+    }
+};
