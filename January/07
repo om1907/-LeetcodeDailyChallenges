@@ -1,0 +1,28 @@
+Link :  https://leetcode.com/problems/gas-station/
+
+
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& costs) {
+        int n,remGas=0,i,ans=-1;
+        n=costs.size();
+        for(i=0;i<2*n;i++){
+            int currGas=gas[i%n]+remGas;
+            int reqGas=costs[i%n];
+            if(reqGas>currGas){
+                if(i>=n){
+                    return -1;
+                }
+                ans=-1;
+                remGas=0;
+            }
+            else{
+                if(ans==-1){
+                    ans=i%n;
+                }                
+                remGas=currGas-reqGas;
+            }
+        }
+        return ans;
+    }
+};
