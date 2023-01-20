@@ -1,0 +1,30 @@
+Link :   https://leetcode.com/problems/non-decreasing-subsequences/submissions/882075418/
+
+
+class Solution {
+public:
+
+    void helper(vector<int>&nums,int indx,int n,vector<int>&currVec,set<vector<int>>&ans){
+        if(indx>=n){
+            if(currVec.size()>=2){
+                ans.insert(currVec);
+            }
+            return;
+        }
+            if(currVec.size()==0||nums[indx]>=currVec.back()){
+                currVec.push_back(nums[indx]);
+                helper(nums,indx+1,n,currVec,ans);
+                currVec.pop_back();     
+            }       
+            helper(nums,indx+1,n,currVec,ans);
+        
+    }
+
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+        int n=nums.size();
+        set<vector<int>>ans;
+        vector<int> currVec;
+        helper(nums,0,n,currVec,ans);
+        return vector(ans.begin(),ans.end());
+    }
+};
